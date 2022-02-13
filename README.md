@@ -7,7 +7,7 @@
 3. Static website on AS EC2 virtual machine
 4. Static website using Paas AWS elastic beanstalk
 
-## S3 Bucket Static Website
+## 1. Static Website hosting using AWS S3 Bucket
 
 Steps:
 
@@ -34,3 +34,32 @@ Steps:
  7. Check the Static website hosting section of the properties tab to find the website end point. Hosted as shown below:
 
 ![image](https://user-images.githubusercontent.com/76478051/153732476-59918c37-c7ff-4f0f-91a2-4fc3ab90412b.png)
+
+## 2. AWS Lambda Serverless website
+
+Follow the steps:
+
+1. In AWS Cloud9, open tab AWS resources and create lambda SAM Application
+2. Chose runtime Python 3.8 
+3. Notice the scaffold created in the environment
+4. edit app.py file (the which contains "def lambda_handler(event,context):") to return a static website
+
+            def lambda_handler(event, context):
+                content = """
+                <html>
+                   <p>This is Serverless Lambda </p>
+                </html>
+                """
+
+                return {
+                    "statusCode": 200,
+                    "body": content,
+                    "headers":{"Content-Type":"text/html",}
+                }
+
+5. Add an API trigger, and deploy
+6. Notice in the Configuration section an API end point for the website
+
+![image](https://user-images.githubusercontent.com/76478051/153733424-3f8356a1-5d0f-4a40-a139-4961690a7976.png)
+
+
